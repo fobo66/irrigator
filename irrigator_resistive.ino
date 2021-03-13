@@ -1,6 +1,6 @@
 #define PUMP_PIN              13
 #define HUMIDITY_PIN          A0
-#define HUMIDITY_THRESHOLD    450 // for capacitive moisture sensor
+#define HUMIDITY_THRESHOLD    200 // for resistive moisture sensor
 
 // interval between humidity probes
 #define INTERVAL        60000 * 3
@@ -22,7 +22,7 @@ void loop()
     humidity = humidityNow;
   }
 
-  if ((waitTime == 0 || millis() - waitTime > INTERVAL) && humidity > HUMIDITY_THRESHOLD ) {
+  if ((waitTime == 0 || millis() - waitTime > INTERVAL) && humidity < HUMIDITY_THRESHOLD ) {
     digitalWrite(PUMP_PIN, HIGH);
     delay(PUMP_TIME);
     digitalWrite(PUMP_PIN, LOW);
